@@ -8,6 +8,8 @@ int main(void)
   int val = 5;
 
   Hashmap_set(map, str, &val);
- 
+  Hashmap_set(map, str, &val); 
+
+  Hashmap_get(map, "Jeff");
   return 0;
 }
