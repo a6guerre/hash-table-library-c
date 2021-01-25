@@ -2,8 +2,8 @@
 Hash Table Library in C
 
 git clone https://github.com/a6guerre/hash-table-library-c
-cd hash-table-library-c
 
+cd hash-table-library-c
 
 # Build
 Note: Working on getting the makefile, in the meantime run:
