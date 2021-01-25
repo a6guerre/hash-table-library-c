@@ -1,3 +1,8 @@
+/*
+ * Note: This specific file is from Learn C the Hard Way by Zed Shaw
+ * I used it as a tool in order to create the hashmap datastructures.
+ */
+
 #include "darray.h"
 
 static int DArray_resize(DArray *array, size_t new_capacity);

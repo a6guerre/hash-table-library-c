@@ -39,7 +39,7 @@ static int traverse_cb(HashmapNode *node);
 
 static int traverse_cb(HashmapNode *node)
 {
-  printf("key: %s    value: %d\n", (char *)node->key , *(int *)node->data);
+  printf("(key: %s, value: %d)\n", (char *)node->key , *(int *)node->data);
   return 0;
 }
 
@@ -86,11 +86,38 @@ char *test_traverse()
   int rc = Hashmap_traverse(map, traverse_cb);
   mu_assert(rc == 0, "Hashmap Traverse failed\n");
   check(rc == 0, "Error");
+  ++tests_run; 
 
   return NULL;
 
 error:
   return "Hashmap Traverse Failed\n";
+}
+
+char *test_delete_node()
+{  
+  int *data = Hashmap_delete(map, info_arr[0].name);
+  mu_assert(*data == info_arr[0].data, "Data member differs that of deleted node!\n");
+  mu_assert(data != NULL, "Could not find node to delete\n");
+  data =  Hashmap_delete(map, info_arr[0].name);
+  mu_assert(data == NULL, "Error: Deleting node that should've alredy been deleted\n"); // Trigger error on purpose
+
+  data = Hashmap_delete(map, info_arr[1].name);
+  mu_assert(*data == info_arr[1].data, "Data member differs that of deleted node!\n");
+  mu_assert(data != NULL, "Could not find node to delete\n");
+  data =  Hashmap_delete(map, info_arr[1].name);
+  mu_assert(data == NULL, "Error: Deleting node that should've alredy been deleted\n"); // Trigger error on purpose
+  ++tests_run;
+
+  return NULL;
+}
+
+char *test_destroy()
+{
+  Hashmap_destroy(map);
+  ++tests_run;
+
+  return NULL;
 }
 
 char *all_tests()
@@ -100,6 +127,8 @@ char *all_tests()
   check((msg = test_create_map()) == NULL, "Test Create Map Failed\n");
   check((msg = test_append_entry()) == NULL, "Test Append Entry Failed\n");
   check((msg = test_traverse()) == NULL, "");
+  check((msg = test_delete_node()) == NULL, "");
+  check((msg = test_destroy()) == NULL, "");
 
   return NULL;
 
