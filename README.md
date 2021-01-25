@@ -6,8 +6,10 @@ cd hash-table-library-c
 
 
 # Build
-Note: Working on getting the makefile, in the meantime run
+Note: Working on getting the makefile, in the meantime run:
+
 gcc darray.c hashmap.c tests.c -o test
+
 ./test
 
 Feel free to modify tests, or link this library to your code if you need a hashmap data structures.
